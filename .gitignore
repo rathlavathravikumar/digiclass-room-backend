@@ -26,4 +26,4 @@ dist-ssr
 
 #pocektFlow and pocketFlow2
 PocektFlow/
-pocketflow-env/
+pocketflow-env/.env
