@@ -11,6 +11,7 @@
 import mongoose,{ Schema } from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import { getAccessTokenSecret, getRefreshTokenSecret, getAccessTokenExpiry, getRefreshTokenExpiry } from "../utils/jwtConfig.js";
 
 const teacherSchema=new Schema({
 
@@ -76,8 +77,8 @@ teacherSchema.methods.generateAccessToken=function(){
         admin_id: this.admin_id
         },
 
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn:process.env.ACCESS_TOKEN_EXPIRY }
+        getAccessTokenSecret(),
+        { expiresIn:getAccessTokenExpiry() }
     )
 }
 teacherSchema.methods.generateRefreshToken=function(){
@@ -87,8 +88,8 @@ teacherSchema.methods.generateRefreshToken=function(){
             role : "teacher",
             admin_id: this.admin_id
         },
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn:process.env.REFRESH_TOKEN_EXPIRY}
+        getRefreshTokenSecret(),
+        {expiresIn:getRefreshTokenExpiry()}
     )
 }
 export const Teacher=mongoose.model("Teacher",teacherSchema)

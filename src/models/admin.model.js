@@ -10,6 +10,7 @@
 import mongoose,{ Schema } from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import { getAccessTokenSecret, getRefreshTokenSecret, getAccessTokenExpiry, getRefreshTokenExpiry } from "../utils/jwtConfig.js";
 
 const adminSchema=new Schema({
 
@@ -61,8 +62,8 @@ adminSchema.methods.generateAccessToken=function(){
         role: "admin"
         },
 
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn:process.env.ACCESS_TOKEN_EXPIRY }
+        getAccessTokenSecret(),
+        { expiresIn:getAccessTokenExpiry() }
     )
 }
 adminSchema.methods.generateRefreshToken=function(){
@@ -71,8 +72,8 @@ adminSchema.methods.generateRefreshToken=function(){
             _id: this._id,
             role : "admin"
         },
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn:process.env.REFRESH_TOKEN_EXPIRY}
+        getRefreshTokenSecret(),
+        {expiresIn:getRefreshTokenExpiry()}
     )
 }
 export const Admin=mongoose.model("Admin",adminSchema)

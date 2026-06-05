@@ -59,7 +59,6 @@ app.use(  // for the logger the request and response
 app.use(express.json({limit:'16kb'}))
 app.use(express.urlencoded({limit:'16kb'}))
 app.use(express.static('public'))
-app.use(errorHandler)
 
 //import routers
 import healthcheckRouter from "./routes/healthcheck.route.js"
@@ -102,6 +101,6 @@ app.get('/',(req,res)=>{
     res.status(200).send("welcome to DigLibrary")
 })
 
-
+app.use(errorHandler)
 
 export default app

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { ApiErrorResponse } from "../utils/ApiErrorResponse.js";
+import { getAccessTokenSecret } from "../utils/jwtConfig.js";
 
 // Extract Bearer token from Authorization header
 const extractToken = (req) => {
@@ -15,7 +16,7 @@ const authenticate = (req, res, next) => {
     const token = extractToken(req);
     if (!token) throw new ApiErrorResponse(401, "Unauthorized: missing token");
 
-    const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const payload = jwt.verify(token, getAccessTokenSecret());
     console.log('Token payload:', payload);
     req.user = { _id: payload._id, role: payload.role, admin_id: payload.admin_id };
     console.log('Authenticated user:', req.user);

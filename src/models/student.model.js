@@ -13,6 +13,7 @@ student[icon:student]{
 import mongoose,{ Schema } from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
+import { getAccessTokenSecret, getRefreshTokenSecret, getAccessTokenExpiry, getRefreshTokenExpiry } from "../utils/jwtConfig.js";
 
 const studentSchema=new Schema({
 
@@ -73,8 +74,8 @@ studentSchema.methods.generateAccessToken=function(){
         admin_id: this.admin_id
         },
 
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn:process.env.ACCESS_TOKEN_EXPIRY }
+        getAccessTokenSecret(),
+        { expiresIn:getAccessTokenExpiry() }
     )
 }
 studentSchema.methods.generateRefreshToken=function(){
@@ -84,8 +85,8 @@ studentSchema.methods.generateRefreshToken=function(){
             role : "student",
             admin_id: this.admin_id
         },
-        process.env.REFRESH_TOKEN_SECRET,
-        {expiresIn:process.env.REFRESH_TOKEN_EXPIRY}
+        getRefreshTokenSecret(),
+        {expiresIn:getRefreshTokenExpiry()}
     )
 }
 export const Student=mongoose.model("Student",studentSchema)
