@@ -3,6 +3,9 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import dns from 'dns';
+
+dns.setServers(['1.1.1.1', '0.0.0.0']);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -45,7 +48,8 @@ const Admin = mongoose.model('Admin', adminSchema);
 async function resetPassword(userType, email, newPassword) {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI);
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb+srv://dgadmin:dgadmin2026@digiclassroom.oen9jsx.mongodb.net/digiClassroom?appName=DigiClassRoom';
+    await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB');
 
     let User;

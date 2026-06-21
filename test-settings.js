@@ -6,7 +6,7 @@ import { Student } from './src/models/student.model.js';
 
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/digiclassroom';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://dgadmin:dgadmin2026@digiclassroom.oen9jsx.mongodb.net/digiClassroom?appName=DigiClassRoom';
 
 async function testSettingsEndpoint() {
   try {
