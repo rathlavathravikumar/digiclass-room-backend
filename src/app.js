@@ -5,13 +5,7 @@ import { errorHandler } from './middlewares/error.middleware.js'
 const app=express()
 
 const DEFAULT_ORIGINS = [
-  'http://localhost:8080',
-  'http://127.0.0.1:8080',
-  'http://localhost:8081',
-  'http://127.0.0.1:8081',
-  'http://localhost:8084',
-  'http://127.0.0.1:8084',
-  'http://10.44.155.11:8080'
+  "https://main.d1iepexr0d7ur7.amplifyapp.com/"
 ];
 const ENV_ORIGINS = (process.env.CORS_ORIGIN || process.env.cors_ORIGIN || '')
   .split(',')
