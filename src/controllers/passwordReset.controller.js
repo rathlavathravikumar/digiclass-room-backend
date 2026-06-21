@@ -48,7 +48,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   await user.save({ validateBeforeSave: false });
 
   // In development, return the reset URL for testing
-  const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:8080'}/reset-password?token=${resetToken}&role=${role}`;
+  const resetUrl = `${process.env.FRONTEND_URL || 'https://main.d1iepexr0d7ur7.amplifyapp.com'}/reset-password?token=${resetToken}&role=${role}`;
 
   try {
     // TODO: Send email with reset link
