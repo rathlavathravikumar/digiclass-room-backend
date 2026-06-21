@@ -5,14 +5,14 @@ import { errorHandler } from './middlewares/error.middleware.js'
 const app=express()
 
 const DEFAULT_ORIGINS = [
-  "https://main.d1iepexr0d7ur7.amplifyapp.com",
-  "https://main.d1iepexr0d7ur7.amplifyapp.com/"
+  "https://main.d1iepexr0d7ur7.amplifyapp.com"
 ];
 const ENV_ORIGINS = (process.env.CORS_ORIGIN || process.env.cors_ORIGIN || '')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
-const ALLOWED_ORIGINS = ENV_ORIGINS.length ? ENV_ORIGINS : DEFAULT_ORIGINS;
+const ALLOWED_ORIGINS = (ENV_ORIGINS.length ? ENV_ORIGINS : DEFAULT_ORIGINS)
+  .map((origin) => origin.replace(/\/$/, ""));
 
 app.use(cors({
   origin(origin, callback) {

@@ -26,3 +26,8 @@ dist-ssr
 #pocektFlow and pocketFlow2
 PocektFlow/
 pocketflow-env/.env
+
+# Local environment variables
+.env
+.env.*
+!.env.example
